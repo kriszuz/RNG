@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            height: 100vh;
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(52,74,105,1) 100%, rgba(0,212,255,1) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container{
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: left;
+            color: azure;
+            flex-direction: column;
+            -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+            -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+            box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+            padding: 50px;
+            width: 600px;
+        }
+
+        .button {
+            margin-bottom: 50px;
+        }
+
+        .result {
+            height: 50px;
+        }
+
+        .result span{
+            color: rgb(241, 52, 52);
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="number">
+            <label for="num">Liczba kostek:</label> 
+            <input type="number" name="num">
+        </div>
+        <div class="range">
+            <label>Zakres losowania:</label>
+            <select name="range">
+                <option value="1-6">1-6</option>
+                <option value="1-12">1-12</option>
+                <option value="1-16">1-16</option>
+            </select>
+        </div>
+        <div class="button"><button>Generuj</button></div>
+        
+        <div class="result">Wygenerowane liczby: 
+            <br><span></span>
+        </div>
+    </div>
+
+    <script>
+
+        const howMany = document.querySelector(".number input");
+        const range = document.querySelector(".range select");
+        const result = document.querySelector(".result span")
+
+        const button = document.querySelector(".button button");
+
+        let generatedNumbers = "";
+        
+        
+        button.addEventListener("click", function() {
+            
+            let howManyCubes = howMany.value;
+            let rangeCubes = range.value;
+
+            let rangeValue = "";
+            generatedNumbers = "";
+
+            switch (rangeCubes) {
+                case "1-6":
+                    rangeValue = 6;
+                    break;
+                case "1-12":
+                    rangeValue = 12;
+                    break;
+                case "1-16":
+                    rangeValue = 16;
+                    break;
+            };
+
+            if (howManyCubes === "") {
+                
+                result.innerHTML = "Proszę podać liczbę kostek";
+
+             } else {
+                
+                if (howManyCubes > 20) {
+                
+                    result.innerHTML = "20 to maksymalna liczba kostek";
+                } else {
+                
+                do {
+                    
+                    let n = Math.random() * rangeValue;
+                    n = Math.floor(n) + 1
+                    
+                    if (howManyCubes === 1){
+                        
+                        generatedNumbers += n + " ";
+                        howManyCubes = howManyCubes - 1;
+
+                        result.innerHTML = generatedNumbers
+                    
+                    } else {
+                        
+                        generatedNumbers += n + ", ";
+                        howManyCubes = howManyCubes - 1;
+
+                        result.innerHTML = generatedNumbers
+                    }}
+            
+                while (howManyCubes > 0);
+                
+                }
+            }
+
+            });
+
+
+    </script>
+
+</body>
+</html>
